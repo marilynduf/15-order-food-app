@@ -1,4 +1,3 @@
-// import { mealData } from "../backend/data/available-meals";
 import { useState, useEffect } from "react";
 import logo from "./assets/logo.jpg";
 import CheckoutModal from "./components/CheckoutModal";
@@ -16,25 +15,21 @@ function App() {
         getMeals();
     }, []);
 
-    console.log("availableMeals", availableMeals);
     return (
         <>
             <Header logo={logo}></Header>
             <main id="meals">
-                {/* {mealData.map((meal) => {
+                {availableMeals?.map((meal) => {
+                    console.log(meal.image);
                     return (
                         <AvailableMealCard
-                            img="image"
-                            name="nom"
-                            price="prix"
-                            description="description"
-                            // img={meal.image}
-                            // name={meal.name}
-                            // price={meal.price}
-                            // description={meal.description}
+                            img={"http://localhost:3000/" + meal.image}
+                            name={meal.name}
+                            price={meal.price}
+                            description={meal.description}
                         />
                     );
-                })} */}
+                })}
             </main>
         </>
     );

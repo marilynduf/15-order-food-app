@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import logo from "./assets/logo.jpg";
 import CheckoutModal from "./components/CheckoutModal";
 import Header from "./components/Header";
 import AvailableMealCard from "./components/availableMealCard";
@@ -17,7 +16,7 @@ function App() {
 
     return (
         <>
-            <Header logo={logo}></Header>
+            <Header></Header>
             <main id="meals">
                 {availableMeals?.map((meal) => {
                     console.log(meal.image);

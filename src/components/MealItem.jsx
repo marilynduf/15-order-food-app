@@ -1,3 +1,4 @@
+import Button from "./UI/Button";
 export default function MealItem({ meal }) {
     return (
         <li className="meal-item">
@@ -12,7 +13,7 @@ export default function MealItem({ meal }) {
                     <p className="meal-item-description">{meal.description}</p>
                 </div>
                 <p className="meal-item-actions">
-                    <button className="button">Add to cart</button>
+                    <Button>Add to cart</Button>
                 </p>
             </article>
         </li>

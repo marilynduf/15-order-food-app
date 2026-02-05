@@ -1,5 +1,5 @@
 import logo from "../assets/logo.jpg";
-export default function Header() {
+export default function Header({ handleOnClick }) {
     return (
         <header id="main-header">
             <div id="title">
@@ -7,7 +7,7 @@ export default function Header() {
                 <h1>REACTFOOD</h1>
             </div>
             <nav>
-                <button>Cart (3)</button>
+                <button onClick={handleOnClick}>Cart (3)</button>
             </nav>
         </header>
     );

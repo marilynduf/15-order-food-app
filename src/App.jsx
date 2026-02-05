@@ -4,13 +4,18 @@ import Header from "./components/Header";
 import AvailableMealCard from "./components/Meal";
 
 function App() {
-    const [availableMeals, setAvailableMeals] = useState();
+    const [loadedMeals, setLoadedMeals] = useState([]);
     const dialog = useRef();
     useEffect(() => {
         async function getMeals() {
             const response = await fetch("http://localhost:3000/meals");
-            const data = await response.json();
-            setAvailableMeals(data);
+
+            if (!response.ok) {
+                throw new Error("Error");
+            }
+
+            const meals = await response.json();
+            setLoadedMeals(meals);
         }
         getMeals();
     }, []);
@@ -23,11 +28,12 @@ function App() {
         <>
             <Header handleOnClick={handleOnClick}></Header>
             <CheckoutModal ref={dialog}></CheckoutModal>
-            <main id="meals">
-                {availableMeals?.map((meal) => {
+            <ul id="meals">
+                {loadedMeals?.map((meal) => {
                     console.log(meal.image);
                     return (
                         <AvailableMealCard
+                            key={meal.id}
                             img={"http://localhost:3000/" + meal.image}
                             name={meal.name}
                             price={meal.price}
@@ -35,7 +41,7 @@ function App() {
                         />
                     );
                 })}
-            </main>
+            </ul>
         </>
     );
 }

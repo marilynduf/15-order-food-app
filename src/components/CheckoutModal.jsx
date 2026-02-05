@@ -25,7 +25,7 @@ export default function CheckoutModal({ ref }) {
                     <input id="city" type="text" />
                 </div>
                 <div>
-                    <button type="button" class="button">
+                    <button type="button" className="button">
                         Submit order
                     </button>
                     <button>Close</button>

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import CheckoutModal from "./components/CheckoutModal";
 import Header from "./components/Header";
-import AvailableMealCard from "./components/Meal";
+import AvailableMealCard from "./components/MealItem";
 
 function App() {
     const [loadedMeals, setLoadedMeals] = useState([]);

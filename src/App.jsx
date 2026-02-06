@@ -1,19 +1,29 @@
 import { useRef } from "react";
-import CheckoutModal from "./components/CheckoutModal";
+import CheckoutForm from "./components/CheckoutForm";
+import CartItem from "./components/CartItem";
 import Header from "./components/Header";
 import Meals from "./components/Meals";
 
 function App() {
-    const dialog = useRef();
+    const dialogCheckout = useRef();
+    const dialogCartItem = useRef();
 
     const handleOnClick = function () {
-        dialog.current.showModal();
+        dialogCartItem.current.showModal();
+    };
+    const handleGoToCheckout = function () {
+        dialogCartItem.current.close();
+        dialogCheckout.current.showModal();
     };
 
     return (
         <>
             <Header handleOnClick={handleOnClick}></Header>
-            <CheckoutModal ref={dialog}></CheckoutModal>
+            <CartItem
+                ref={dialogCartItem}
+                onGoToCheckout={handleGoToCheckout}
+            ></CartItem>
+            <CheckoutForm ref={dialogCheckout}></CheckoutForm>
             <Meals></Meals>
         </>
     );

@@ -1,8 +1,9 @@
-import Button from "./UI/Button";
-export default function CheckoutModal({ ref }) {
+import Button from "../components/UI/Button";
+
+export default function CheckoutForm({ ref }) {
     return (
         <dialog ref={ref} className="modal">
-            <form method="dialog" action="">
+            <form method="dialog">
                 <h3>Checkout</h3>
                 <p>Total Amount: </p>
                 <div className="control">

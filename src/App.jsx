@@ -40,6 +40,7 @@ function App() {
             <CartItem
                 ref={dialogCartItem}
                 onGoToCheckout={handleGoToCheckout}
+                meals={itemsAddedToCart}
             ></CartItem>
             <CheckoutForm ref={dialogCheckout}></CheckoutForm>
             <Meals

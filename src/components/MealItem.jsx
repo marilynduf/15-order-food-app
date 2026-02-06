@@ -1,5 +1,7 @@
 import Button from "./UI/Button";
-export default function MealItem({ meal }) {
+export default function MealItem({ meal, onAddToCart }) {
+    const mealName = meal.name;
+
     return (
         <li className="meal-item">
             <article>
@@ -13,7 +15,9 @@ export default function MealItem({ meal }) {
                     <p className="meal-item-description">{meal.description}</p>
                 </div>
                 <p className="meal-item-actions">
-                    <Button>Add to cart</Button>
+                    <Button onClick={() => onAddToCart(mealName)}>
+                        Add to cart
+                    </Button>
                 </p>
             </article>
         </li>

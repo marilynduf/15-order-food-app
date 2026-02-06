@@ -10,18 +10,18 @@ function App() {
 
     const [itemsAddedToCart, setItemsAddedToCart] = useState([]);
 
-    const handleAddToCart = function (mealName) {
+    const handleAddToCart = function ({ id, name, price }) {
         const isMealAlreadyInCart = itemsAddedToCart.some(
-            (item) => item.name === mealName,
+            (item) => item.id === id,
         );
         setItemsAddedToCart((prevState) => {
             return isMealAlreadyInCart
                 ? prevState.map((item) =>
-                      item.name === mealName
+                      item.name === name
                           ? { ...item, qty: item.qty + 1 }
                           : { ...item },
                   )
-                : [...prevState, { name: mealName, qty: 1 }];
+                : [...prevState, { id: id, name: name, qty: 1, price: price }];
         });
     };
 

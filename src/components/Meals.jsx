@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import MealItem from "../components/MealItem";
 
-export default function Meals({ onAddToCart }) {
+export default function Meals({ onAddToCart, onAddSameItemAgain }) {
     const [loadedMeals, setLoadedMeals] = useState([]);
 
     useEffect(() => {

@@ -1,12 +1,16 @@
 import Button from "./UI/Button";
 
-export default function CartItem({ ref, onGoToCheckout, meals }) {
+export default function CartItem({
+    ref,
+    onGoToCheckout,
+    meals,
+    onAddSameItemAgain,
+    onDeleteSameItemAgain,
+}) {
     const totalPrice = meals.reduce(
         (acc, item) => (acc += item.qty * item.price),
         0,
     );
-
-    console.log(totalPrice);
 
     return (
         <dialog ref={ref} className="modal">
@@ -18,9 +22,23 @@ export default function CartItem({ ref, onGoToCheckout, meals }) {
                             <div className="cart-item">
                                 <p>{`${meal.name} - ${meal.qty} x $${meal.price}`}</p>
                                 <div className="cart-item-actions">
-                                    <button>-</button>
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            onDeleteSameItemAgain(meal.id)
+                                        }
+                                    >
+                                        -
+                                    </button>
                                     <p>{meal.qty}</p>
-                                    <button>+</button>
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            onAddSameItemAgain(meal.id)
+                                        }
+                                    >
+                                        +
+                                    </button>
                                 </div>
                             </div>
                         );

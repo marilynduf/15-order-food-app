@@ -10,6 +10,22 @@ function App() {
 
     const [itemsAddedToCart, setItemsAddedToCart] = useState([]);
 
+    const handleAddSameItemAgain = function (id) {
+        setItemsAddedToCart((prevState) => {
+            return prevState.map((item) =>
+                item.id === id ? { ...item, qty: item.qty + 1 } : { ...item },
+            );
+        });
+    };
+
+    const handleDeleteSameItemAgain = function (id) {
+        setItemsAddedToCart((prevState) => {
+            return prevState.map((item) =>
+                item.id === id ? { ...item, qty: item.qty - 1 } : { ...item },
+            );
+        });
+    };
+
     const handleAddToCart = function ({ id, name, price }) {
         const isMealAlreadyInCart = itemsAddedToCart.some(
             (item) => item.id === id,
@@ -41,6 +57,8 @@ function App() {
                 ref={dialogCartItem}
                 onGoToCheckout={handleGoToCheckout}
                 meals={itemsAddedToCart}
+                onAddSameItemAgain={handleAddSameItemAgain}
+                onDeleteSameItemAgain={handleDeleteSameItemAgain}
             ></CartItem>
             <CheckoutForm ref={dialogCheckout}></CheckoutForm>
             <Meals

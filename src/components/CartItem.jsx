@@ -3,8 +3,7 @@ import { useContext } from "react";
 import { CartContext } from "../store/shopping-cart-context";
 
 export default function CartItem({ ref, onGoToCheckout }) {
-    const { items, addSameItemAgain, deleteSameItemAgain } =
-        useContext(CartContext);
+    const { items, addSameItemAgain, removeOneItem } = useContext(CartContext);
 
     const totalPrice = items.reduce(
         (acc, item) => (acc += item.qty * item.price),
@@ -26,7 +25,7 @@ export default function CartItem({ ref, onGoToCheckout }) {
                                         <button
                                             type="button"
                                             onClick={() =>
-                                                deleteSameItemAgain(item.id)
+                                                removeOneItem(item.id)
                                             }
                                         >
                                             -

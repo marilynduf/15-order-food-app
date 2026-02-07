@@ -21,8 +21,20 @@ function App() {
 
     const handleDeleteSameItemAgain = function (id) {
         setItemsAddedToCart((prevState) => {
+            const item = prevState.find((item) => item.id === id);
+
+            if (!item) return prevState;
+
+            if (item.qty === 1) {
+                const confirmed = window.confirm(
+                    "Veux-tu vraiment supprimer cet item du panier ?",
+                );
+                if (!confirmed) return prevState;
+                return prevState.filter((item) => item.id !== id);
+            }
+
             return prevState.map((item) =>
-                item.id === id ? { ...item, qty: item.qty - 1 } : { ...item },
+                item.id === id ? { ...item, qty: item.qty - 1 } : item,
             );
         });
     };
@@ -53,7 +65,7 @@ function App() {
     const ctxValue = {
         items: itemsAddedToCart,
         addSameItemAgain: HandleAddSameItemAgain,
-        deleteSameItemAgain: handleDeleteSameItemAgain,
+        removeOneItem: handleDeleteSameItemAgain,
     };
 
     return (

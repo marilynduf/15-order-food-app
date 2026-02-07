@@ -11,7 +11,7 @@ function App() {
 
     const [itemsAddedToCart, setItemsAddedToCart] = useState([]);
 
-    const handleAddSameItemAgain = function (id) {
+    const HandleAddSameItemAgain = function (id) {
         setItemsAddedToCart((prevState) => {
             return prevState.map((item) =>
                 item.id === id ? { ...item, qty: item.qty + 1 } : { ...item },
@@ -27,7 +27,7 @@ function App() {
         });
     };
 
-    const handleAddToCart = function ({ id, name, price }) {
+    const handleAddItemToCart = function ({ id, name, price }) {
         const isMealAlreadyInCart = itemsAddedToCart.some(
             (item) => item.id === id,
         );
@@ -52,7 +52,7 @@ function App() {
 
     const ctxValue = {
         items: itemsAddedToCart,
-        addSameItemAgain: handleAddSameItemAgain,
+        addSameItemAgain: HandleAddSameItemAgain,
         deleteSameItemAgain: handleDeleteSameItemAgain,
     };
 
@@ -66,7 +66,7 @@ function App() {
             <CheckoutForm ref={dialogCheckout}></CheckoutForm>
             <Meals
                 meals={itemsAddedToCart}
-                onAddToCart={handleAddToCart}
+                onAddItemToCart={handleAddItemToCart}
             ></Meals>
         </CartContext.Provider>
     );

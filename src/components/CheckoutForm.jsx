@@ -1,8 +1,9 @@
+import Modal from "./UI/Modal";
 import Button from "../components/UI/Button";
 
 export default function CheckoutForm({ ref }) {
     return (
-        <dialog ref={ref} className="modal">
+        <Modal ref={ref}>
             <form method="dialog">
                 <h3>Checkout</h3>
                 <p>Total Amount: </p>
@@ -33,6 +34,6 @@ export default function CheckoutForm({ ref }) {
                     <Button>Submit order</Button>
                 </div>
             </form>
-        </dialog>
+        </Modal>
     );
 }

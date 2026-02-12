@@ -1,9 +1,18 @@
-import Button from "./UI/Button";
-import { useContext } from "react";
-import { CartContext } from "../store/shopping-cart-context";
+import CartContext from "../store/CartContext";
+import { useContext, useReduce } from "react";
 
-export default function CartItem({ ref, onGoToCheckout }) {
-    const { items, addSameItemAgain, removeOneItem } = useContext(CartContext);
+import Button from "./UI/Button";
+
+export default function CartItem({ meals, ref, onGoToCheckout }) {
+    const { items, addItem, removeItem } = useContext(CartContext);
+
+    const handleAddItem = function (item) {
+        addItem(item);
+    };
+
+    const handleRemoveItem = function (id) {
+        removeItem(id);
+    };
 
     const totalPrice = items.reduce(
         (acc, item) => (acc += item.qty * item.price),
@@ -25,7 +34,7 @@ export default function CartItem({ ref, onGoToCheckout }) {
                                         <button
                                             type="button"
                                             onClick={() =>
-                                                removeOneItem(item.id)
+                                                handleRemoveItem(item.id)
                                             }
                                         >
                                             -
@@ -33,9 +42,7 @@ export default function CartItem({ ref, onGoToCheckout }) {
                                         <p>{item.qty}</p>
                                         <button
                                             type="button"
-                                            onClick={() =>
-                                                addSameItemAgain(item.id)
-                                            }
+                                            onClick={() => handleAddItem(item)}
                                         >
                                             +
                                         </button>

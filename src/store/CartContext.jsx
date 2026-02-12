@@ -4,12 +4,14 @@ import { createContext, useReducer, useState } from "react";
 const CartContext = createContext({
     items: [],
     addItem: (item) => {},
+    removeItem: (id) => {},
     // removeOneItem: (id) => {},
     // deleteItemFromCart: (id) => {},
 });
 
 // la fonction du reducer reçoit un état et une action, puis retourne un nouvel état
 function cartReducer(state, action) {
+    // ADD ITEM -------------------
     if (action.type === "ADD_ITEM") {
         const isInCart = state.items.findIndex(
             (item) => item.id === action.item.id,
@@ -26,6 +28,34 @@ function cartReducer(state, action) {
         }
         return { ...state, items: updatedItems };
     }
+    // REMOVE ITEM -------------------
+    if (action.type === "REMOVE_ITEM") {
+        const isInCart = state.items.findIndex((item) => item.id === action.id);
+        const updatedItems = [...state.items];
+
+        if (isInCart > -1) {
+            const existingItem = state.items[isInCart];
+            console.log(existingItem);
+            if (existingItem.qty === 1) {
+                const updatedItems = state.items.filter(
+                    (item) => item.id !== action.id,
+                );
+                return { ...state, items: updatedItems };
+            }
+
+            if (existingItem.qty > 1) {
+                console.log("existingItem.qty > 1");
+                const updatedItem = {
+                    ...existingItem,
+                    qty: existingItem.qty - 1,
+                };
+                updatedItems[isInCart] = updatedItem;
+            }
+        }
+
+        console.log(updatedItems);
+        return { ...state, items: updatedItems };
+    }
 }
 
 // Composant qui enveloppe les composants enfants ({children}) qui transmet les vraies données du state
@@ -38,9 +68,15 @@ export function CartContextProvider({ children }) {
     function addItem(item) {
         dispatch({ type: "ADD_ITEM", item });
     }
+
+    function removeItem(id) {
+        dispatch({ type: "REMOVE_ITEM", id });
+    }
+
     const CartContextValue = {
         items: cart.items,
         addItem,
+        removeItem,
     };
 
     return (

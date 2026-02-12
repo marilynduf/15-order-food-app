@@ -1,10 +1,9 @@
 import CartContext from "../store/CartContext";
 import { currencyFormatter } from "../util/formatting";
 import { useContext, useReduce } from "react";
-
 import Button from "./UI/Button";
 
-export default function CartItem({ meals, ref, onGoToCheckout }) {
+export default function CartItem({ ref, onGoToCheckout }) {
     const { items, addItem, removeItem } = useContext(CartContext);
 
     const handleAddItem = function (item) {

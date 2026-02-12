@@ -1,11 +1,10 @@
-import Button from "../UI/Button";
-export default function Modal() {
-    return (
-        <dialog className="modal">
-            <div className="modal-actions">
-                <Button></Button>
-                <Button></Button>
-            </div>
-        </dialog>
+import { createPortal } from "react-dom";
+
+export default function Modal({ ref, children }) {
+    return createPortal(
+        <dialog ref={ref} className="modal">
+            {children}
+        </dialog>,
+        document.getElementById("modal"),
     );
 }

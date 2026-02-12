@@ -2,6 +2,7 @@ import CartContext from "../store/CartContext";
 import { currencyFormatter } from "../util/formatting";
 import { useContext } from "react";
 import Button from "./UI/Button";
+import Modal from "./UI/Modal";
 
 export default function CartItem({ ref, onGoToCheckout }) {
     const { items, addItem, removeItem } = useContext(CartContext);
@@ -20,7 +21,7 @@ export default function CartItem({ ref, onGoToCheckout }) {
     );
 
     return (
-        <dialog ref={ref} className="modal">
+        <Modal ref={ref}>
             <form method="dialog" className="cart">
                 <h2>Your cart</h2>
                 {items.length === 0 && <p>No meal added to cart</p>}
@@ -62,6 +63,6 @@ export default function CartItem({ ref, onGoToCheckout }) {
                     </Button>
                 </div>
             </form>
-        </dialog>
+        </Modal>
     );
 }

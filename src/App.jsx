@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { CartContext } from "./store/shopping-cart-context";
+import { CartContextProvider } from "./store/CartContext";
 import CheckoutForm from "./components/CheckoutForm";
 import CartItem from "./components/CartItem";
 import Header from "./components/Header";
@@ -62,25 +62,16 @@ function App() {
         dialogCheckout.current.showModal();
     };
 
-    const ctxValue = {
-        items: itemsAddedToCart,
-        addSameItemAgain: HandleAddSameItemAgain,
-        removeOneItem: handleDeleteSameItemAgain,
-    };
-
     return (
-        <CartContext.Provider value={ctxValue}>
+        <CartContextProvider>
             <Header handleOnClick={handleOnClick}></Header>
             <CartItem
                 ref={dialogCartItem}
                 onGoToCheckout={handleGoToCheckout}
             ></CartItem>
             <CheckoutForm ref={dialogCheckout}></CheckoutForm>
-            <Meals
-                meals={itemsAddedToCart}
-                onAddItemToCart={handleAddItemToCart}
-            ></Meals>
-        </CartContext.Provider>
+            <Meals></Meals>
+        </CartContextProvider>
     );
 }
 

@@ -1,4 +1,5 @@
 import CartContext from "../store/CartContext";
+import { currencyFormatter } from "../util/formatting";
 import { useContext, useReduce } from "react";
 
 import Button from "./UI/Button";
@@ -29,7 +30,7 @@ export default function CartItem({ meals, ref, onGoToCheckout }) {
                         {items.map((item) => {
                             return (
                                 <div className="cart-item">
-                                    <p>{`${item.name} - ${item.qty} x $${item.price}`}</p>
+                                    <p>{`${item.name} - ${item.qty} x ${currencyFormatter.format(item.price)}`}</p>
                                     <div className="cart-item-actions">
                                         <button
                                             type="button"
@@ -52,7 +53,9 @@ export default function CartItem({ meals, ref, onGoToCheckout }) {
                         })}
                     </ul>
                 )}
-                <p className="cart-total">{totalPrice}</p>
+                <p className="cart-total">
+                    {currencyFormatter.format(totalPrice)}
+                </p>
                 <div className="modal-actions">
                     <Button textOnly>Close</Button>
                     <Button type="button" onClick={onGoToCheckout}>

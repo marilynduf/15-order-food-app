@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import MealItem from "../components/MealItem";
 
-export default function Meals({ onAddItemToCart }) {
+export default function Meals() {
     const [loadedMeals, setLoadedMeals] = useState([]);
 
     useEffect(() => {
@@ -21,11 +21,7 @@ export default function Meals({ onAddItemToCart }) {
     return (
         <ul id="meals">
             {loadedMeals.map((meal) => (
-                <MealItem
-                    key={meal.id}
-                    meal={meal}
-                    onAddItemToCart={onAddItemToCart}
-                />
+                <MealItem key={meal.id} meal={meal} />
             ))}
         </ul>
     );

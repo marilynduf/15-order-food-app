@@ -1,7 +1,17 @@
+import { useContext } from "react";
+import CartContext from "../store/CartContext";
+
 import logo from "../assets/logo.jpg";
 import Button from "./UI/Button";
 
 export default function Header({ handleOnClick }) {
+    const { items } = useContext(CartContext);
+    console.log(items);
+
+    const totalMealsIncart = items.reduce((total, item) => {
+        return total + item.qty;
+    }, 0);
+
     return (
         <header id="main-header">
             <div id="title">
@@ -10,7 +20,7 @@ export default function Header({ handleOnClick }) {
             </div>
             <nav>
                 <Button textOnly onClick={handleOnClick}>
-                    Cart (3)
+                    Cart ({totalMealsIncart})
                 </Button>
             </nav>
         </header>

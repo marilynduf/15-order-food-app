@@ -1,11 +1,14 @@
 import CartContext from "../store/CartContext";
+import UserProgressContext from "../store/UserProgressContext";
 import { currencyFormatter } from "../util/formatting";
 import { useContext } from "react";
 import Button from "./UI/Button";
 import Modal from "./UI/Modal";
 
-export default function CartItem({ ref, onGoToCheckout }) {
+export default function CartItem({ onGoToCheckout }) {
     const { items, addItem, removeItem } = useContext(CartContext);
+
+    const { progress } = useContext(UserProgressContext);
 
     const handleAddItem = function (item) {
         addItem(item);
@@ -21,7 +24,7 @@ export default function CartItem({ ref, onGoToCheckout }) {
     );
 
     return (
-        <Modal ref={ref}>
+        <Modal open={progress === "cart"}>
             <form method="dialog" className="cart">
                 <h2>Your cart</h2>
                 {items.length === 0 && <p>No meal added to cart</p>}

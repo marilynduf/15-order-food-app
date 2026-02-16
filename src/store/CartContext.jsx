@@ -35,7 +35,7 @@ function cartReducer(state, action) {
 
         if (isInCart > -1) {
             const existingItem = state.items[isInCart];
-            console.log(existingItem);
+
             if (existingItem.qty === 1) {
                 const updatedItems = state.items.filter(
                     (item) => item.id !== action.id,
@@ -44,7 +44,6 @@ function cartReducer(state, action) {
             }
 
             if (existingItem.qty > 1) {
-                console.log("existingItem.qty > 1");
                 const updatedItem = {
                     ...existingItem,
                     qty: existingItem.qty - 1,
@@ -53,7 +52,6 @@ function cartReducer(state, action) {
             }
         }
 
-        console.log(updatedItems);
         return { ...state, items: updatedItems };
     }
 }

@@ -29,7 +29,7 @@ export default function CartItem({ ref, onGoToCheckout }) {
                     <ul>
                         {items.map((item) => {
                             return (
-                                <div className="cart-item">
+                                <div key={item.id} className="cart-item">
                                     <p>{`${item.name} - ${item.qty} x ${currencyFormatter.format(item.price)}`}</p>
                                     <div className="cart-item-actions">
                                         <button

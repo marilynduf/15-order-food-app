@@ -1,9 +1,13 @@
 import Modal from "./UI/Modal";
 import Button from "../components/UI/Button";
+import { useContext } from "react";
+import UserProgressContext from "../store/UserProgressContext";
 
-export default function CheckoutForm({ ref }) {
+export default function CheckoutForm() {
+    const { progress } = useContext(UserProgressContext);
+
     return (
-        <Modal ref={ref}>
+        <Modal open={progress === "checkout"}>
             <form method="dialog">
                 <h3>Checkout</h3>
                 <p>Total Amount: </p>

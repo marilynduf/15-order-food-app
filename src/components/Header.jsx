@@ -7,7 +7,7 @@ import Button from "./UI/Button";
 
 export default function Header() {
     const { items } = useContext(CartContext);
-    const { showCart, progress } = useContext(UserProgressContext);
+    const { showCart } = useContext(UserProgressContext);
 
     const totalMealsIncart = items.reduce((total, item) => {
         return total + item.qty;

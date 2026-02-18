@@ -2,6 +2,7 @@ import CartContext from "../store/CartContext";
 import UserProgressContext from "../store/UserProgressContext";
 import { currencyFormatter } from "../util/formatting";
 import { useContext } from "react";
+import CartItem from "./CartItem";
 import Button from "./UI/Button";
 import Modal from "./UI/Modal";
 
@@ -39,26 +40,15 @@ export default function Cart() {
                 <ul>
                     {items.map((item) => {
                         return (
-                            <div key={item.id} className="cart-item">
-                                <p>{`${item.name} - ${item.qty} x ${currencyFormatter.format(item.price)}`}</p>
-                                <div className="cart-item-actions">
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            handleRemoveItem(item.id)
-                                        }
-                                    >
-                                        -
-                                    </button>
-                                    <p>{item.qty}</p>
-                                    <button
-                                        type="button"
-                                        onClick={() => handleAddItem(item)}
-                                    >
-                                        +
-                                    </button>
-                                </div>
-                            </div>
+                            <CartItem
+                                key={item.id}
+                                onIncrease={() => handleAddItem(item)}
+                                onDecrease={() => handleRemoveItem(item.id)}
+                                id={item.id}
+                                name={item.name}
+                                qty={item.qty}
+                                price={item.price}
+                            ></CartItem>
                         );
                     })}
                 </ul>

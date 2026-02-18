@@ -11,6 +11,8 @@ export default function Cart() {
     const { progress, hideCart, showCheckout } =
         useContext(UserProgressContext);
 
+    const isDisabled = items.length <= 0;
+
     const handleCloseCart = function () {
         hideCart();
     };
@@ -58,7 +60,13 @@ export default function Cart() {
                 <Button textOnly onClick={handleCloseCart}>
                     Close
                 </Button>
-                <Button type="button" onClick={handleShowCheckout}>
+
+                <Button
+                    type="button"
+                    onClick={handleShowCheckout}
+                    className={isDisabled ? "disabled" : undefined}
+                    disabled={isDisabled}
+                >
                     Go to checkout
                 </Button>
             </div>

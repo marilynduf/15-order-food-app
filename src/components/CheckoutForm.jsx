@@ -5,7 +5,11 @@ import { useContext } from "react";
 import UserProgressContext from "../store/UserProgressContext";
 
 export default function CheckoutForm() {
-    const { progress } = useContext(UserProgressContext);
+    const { progress, hideCheckout } = useContext(UserProgressContext);
+
+    const handleCloseCheckout = function () {
+        hideCheckout();
+    };
 
     return (
         <Modal open={progress === "checkout"}>
@@ -45,7 +49,11 @@ export default function CheckoutForm() {
                     ></Input>
                 </div>
                 <div className="modal-actions">
-                    <Button type="button" textOnly>
+                    <Button
+                        onClick={handleCloseCheckout}
+                        type="button"
+                        textOnly
+                    >
                         Close
                     </Button>
                     <Button>Submit order</Button>

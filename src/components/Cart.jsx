@@ -35,7 +35,11 @@ export default function Cart() {
     );
 
     return (
-        <Modal className="cart" open={progress === "cart"}>
+        <Modal
+            className="cart"
+            open={progress === "cart"}
+            handleCloseCart={handleCloseCart}
+        >
             <h2>Your cart</h2>
             {items.length === 0 && <p>No meal added to cart</p>}
             {items.length > 0 && (
@@ -57,7 +61,7 @@ export default function Cart() {
             )}
             <p className="cart-total">{currencyFormatter.format(totalPrice)}</p>
             <div className="modal-actions">
-                <Button textOnly onClick={handleCloseCart}>
+                <Button type="button" textOnly onClick={handleCloseCart}>
                     Close
                 </Button>
 
